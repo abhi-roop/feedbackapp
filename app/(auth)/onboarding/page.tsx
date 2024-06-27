@@ -1,7 +1,7 @@
 "use server"
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from "next/navigation";
-import { fetchUserById } from '@/lib/actions/user.actions';
+import { fetchUser} from '@/lib/actions/user.actions';
 import AccountProfile from "@/components/forms/AccountProfile";
 
 async function Page() {
@@ -9,7 +9,7 @@ async function Page() {
   if (!user) return null; // to avoid typescript warnings
 
 
-  const userInfo = await fetchUserById(user?.id);
+  const userInfo = await fetchUser(user?.id);
   console.log(userInfo)
   
   if (userInfo?.onboarded) redirect("/");
