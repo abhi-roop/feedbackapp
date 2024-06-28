@@ -4,6 +4,22 @@
 
 import { currentUser } from '@clerk/nextjs/server';
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+// app/api/uploadthing/route.ts
+
+import { NextApiRequest, NextApiResponse } from 'next';
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === 'POST') {
+    // Handle POST request logic here
+    res.status(200).json({ message: 'File uploaded successfully' });
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+};
+
+export default handler;
+
 
 const f = createUploadthing();
 
