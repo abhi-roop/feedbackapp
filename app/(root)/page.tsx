@@ -2,9 +2,13 @@
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import ThreadCard from "@/components/cards/ThreadCard";
+import { redirect } from "next/navigation";
 export default async function Home() {
 const result = await fetchPosts(1,30);
 const user=await currentUser();
+  if(!user)
+    redirect("/sign-in")
+
   return (
     <>
     <h1 className="head-text text-left">Home</h1>
